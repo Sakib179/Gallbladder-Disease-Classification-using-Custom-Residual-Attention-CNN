@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1040" viewBox="0 0 1440 1040" role="img" aria-labelledby="title description">
+  <title id="title">Gallbladder Residual Attention CNN architecture</title>
+  <desc id="description">RGB input 3 by 100 by 100. A stride-two convolution produces 32 by 50 by 50 features. Three residual attention blocks produce 64 by 25 by 25, 128 by 12 by 12, and 256 by 6 by 6 features. A final convolution produces 512 by 6 by 6 features. Concatenated global average and max pooling yields 1024 features, followed by dense layers with 256, 128, and nine outputs. The lower panel shows the two pre-activation convolutions, projection shortcut, channel attention, and max pooling inside each residual block.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; fill: #17324d; }
+      .title { font-size: 32px; font-weight: 700; }
+      .subtitle { font-size: 18px; fill: #526579; }
+      .section { font-size: 21px; font-weight: 700; }
+      .label { font-size: 19px; font-weight: 650; text-anchor: middle; }
+      .small { font-size: 16px; fill: #526579; text-anchor: middle; }
+      .shape { font-size: 19px; font-weight: 600; text-anchor: middle; fill: #087e8b; }
+      .panel { fill: white; stroke: #dce5ed; stroke-width: 1.5; }
+      .card { fill: #f3f7fb; stroke: #ccdae7; stroke-width: 1.5; }
+      .attention { fill: #e9f7f5; stroke: #94cfc5; stroke-width: 1.5; }
+      .head { fill: #f1edfb; stroke: #d4c8ec; stroke-width: 1.5; }
+      .line { fill: none; stroke: #64748b; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1440" height="1040" fill="#f7fafc"/>
+  <text x="40" y="53" class="title">Residual Attention CNN</text>
+  <text x="40" y="83" class="subtitle">Gallbladder ultrasound classification · PyTorch · trained from scratch</text>
+  <rect x="1110" y="29" width="290" height="55" rx="12" fill="#17324d"/>
+  <text x="1255" y="63" text-anchor="middle" style="fill:white;font-size:19px;font-weight:600">2,709,353 parameters</text>
+
+  <rect x="24" y="114" width="1392" height="416" rx="20" class="panel"/>
+  <text x="48" y="150" class="section">01  Feature extraction</text>
+
+  <rect x="48" y="172" width="170" height="126" rx="12" class="card"/>
+  <text x="133" y="204" class="label">RGB input</text>
+  <text x="133" y="233" class="small">Values in [0, 1]</text>
+  <text x="133" y="271" class="shape">3 × 100 × 100</text>
+
+  <rect x="252" y="172" width="198" height="126" rx="12" class="card"/>
+  <text x="351" y="204" class="label">Stem</text>
+  <text x="351" y="230" class="small">3 × 3 conv · stride 2</text>
+  <text x="351" y="251" class="small">BN → SiLU</text>
+  <text x="351" y="280" class="shape">32 × 50 × 50</text>
+
+  <rect x="484" y="172" width="198" height="126" rx="12" class="attention"/>
+  <text x="583" y="204" class="label">Residual block 1</text>
+  <text x="583" y="233" class="small">Attention + pooling</text>
+  <text x="583" y="271" class="shape">64 × 25 × 25</text>
+
+  <rect x="716" y="172" width="198" height="126" rx="12" class="attention"/>
+  <text x="815" y="204" class="label">Residual block 2</text>
+  <text x="815" y="233" class="small">Attention + pooling</text>
+  <text x="815" y="271" class="shape">128 × 12 × 12</text>
+
+  <rect x="948" y="172" width="198" height="126" rx="12" class="attention"/>
+  <text x="1047" y="204" class="label">Residual block 3</text>
+  <text x="1047" y="233" class="small">Attention + pooling</text>
+  <text x="1047" y="271" class="shape">256 × 6 × 6</text>
+
+  <rect x="1180" y="172" width="210" height="126" rx="12" class="card"/>
+  <text x="1285" y="202" class="label">Final convolution</text>
+  <text x="1285" y="226" class="small">BN → SiLU → 3 × 3 conv</text>
+  <text x="1285" y="248" class="small">BN → SiLU</text>
+  <text x="1285" y="280" class="shape">512 × 6 × 6</text>
+
+  <path d="M218 235 H248" class="line"/>
+  <path d="M450 235 H480" class="line"/>
+  <path d="M682 235 H712" class="line"/>
+  <path d="M914 235 H944" class="line"/>
+  <path d="M1146 235 H1176" class="line"/>
+  <path d="M1285 298 V363" class="line"/>
+
+  <text x="48" y="344" class="section">02  Classification</text>
+  <text x="395" y="344" class="subtitle">Follow arrows from pooling on the right to prediction on the left.</text>
+
+  <rect x="1180" y="368" width="210" height="132" rx="12" class="card"/>
+  <text x="1285" y="399" class="label">Global pooling</text>
+  <text x="1285" y="426" class="small">Average + max</text>
+  <text x="1285" y="450" class="small">Concatenate 512 + 512</text>
+  <text x="1285" y="481" class="shape">1,024 features</text>
+
+  <rect x="907" y="368" width="235" height="132" rx="12" class="head"/>
+  <text x="1024.5" y="402" class="label">Head normalization</text>
+  <text x="1024.5" y="434" class="small">BN → Dropout (0.3)</text>
+  <text x="1024.5" y="481" class="shape">1,024 features</text>
+
+  <rect x="634" y="368" width="235" height="132" rx="12" class="head"/>
+  <text x="751.5" y="400" class="label">Dense layer 1</text>
+  <text x="751.5" y="427" class="small">Linear → SiLU → BN</text>
+  <text x="751.5" y="451" class="small">Dropout (0.4)</text>
+  <text x="751.5" y="481" class="shape">1,024 → 256</text>
+
+  <rect x="361" y="368" width="235" height="132" rx="12" class="head"/>
+  <text x="478.5" y="400" class="label">Dense layer 2</text>
+  <text x="478.5" y="427" class="small">Linear → SiLU → BN</text>
+  <text x="478.5" y="451" class="small">Dropout (0.3)</text>
+  <text x="478.5" y="481" class="shape">256 → 128</text>
+
+  <rect x="48" y="368" width="275" height="132" rx="12" class="attention"/>
+  <text x="185.5" y="400" class="label">Nine-class prediction</text>
+  <text x="185.5" y="427" class="small">Linear: 128 → 9 logits</text>
+  <text x="185.5" y="453" class="small">Softmax + argmax</text>
+  <text x="185.5" y="479" class="small">during evaluation</text>
+  <path d="M1180 434 H1146" class="line"/>
+  <path d="M907 434 H873" class="line"/>
+  <path d="M634 434 H600" class="line"/>
+  <path d="M361 434 H327" class="line"/>
+
+  <rect x="24" y="550" width="1392" height="444" rx="20" class="panel"/>
+  <text x="48" y="590" class="section">03  Inside each residual attention block</text>
+
+  <rect x="48" y="697" width="108" height="62" rx="10" class="card"/>
+  <text x="102" y="734" class="label">Input x</text>
+  <circle cx="190" cy="728" r="4" fill="#64748b"/>
+  <path d="M156 728 H190 V665 H241" class="line"/>
+  <rect x="245" y="623" width="215" height="84" rx="10" class="card"/>
+  <text x="352.5" y="655" class="label">BN → SiLU</text>
+  <text x="352.5" y="684" class="small">3 × 3 convolution</text>
+  <path d="M460 665 H491" class="line"/>
+  <rect x="495" y="623" width="215" height="84" rx="10" class="card"/>
+  <text x="602.5" y="655" class="label">BN → SiLU</text>
+  <text x="602.5" y="684" class="small">3 × 3 convolution</text>
+  <path d="M710 665 H785 V700" class="line"/>
+
+  <path d="M190 728 V830 H371" class="line"/>
+  <rect x="375" y="795" width="215" height="70" rx="10" class="card"/>
+  <text x="482.5" y="824" class="label">1 × 1 conv → BN</text>
+  <text x="482.5" y="848" class="small">Projection shortcut</text>
+  <path d="M590 830 H785 V756" class="line"/>
+  <circle cx="785" cy="728" r="24" fill="#17324d"/>
+  <text x="785" y="736" text-anchor="middle" style="font-size:28px;fill:white">+</text>
+  <text x="816" y="782" class="small">y</text>
+
+  <path d="M809 728 H866" class="line"/>
+  <rect x="870" y="687" width="235" height="82" rx="10" class="attention"/>
+  <text x="987.5" y="720" class="label">Channel attention</text>
+  <text x="987.5" y="748" class="small">y × sigmoid gate</text>
+  <path d="M1105 728 H1136" class="line"/>
+  <rect x="1140" y="687" width="235" height="82" rx="10" class="card"/>
+  <text x="1257.5" y="720" class="label">Max pooling</text>
+  <text x="1257.5" y="748" class="small">2 × 2 · stride 2</text>
+
+  <rect x="870" y="809" width="505" height="137" rx="12" fill="#f0faf8"/>
+  <text x="890" y="838" style="font-size:17px;font-weight:650">Attention gate, reduction ratio = 8</text>
+  <text x="890" y="867" style="font-size:16px;fill:#526579">d = GlobalAvgPool(y) + GlobalMaxPool(y)</text>
+  <text x="890" y="893" style="font-size:16px;fill:#526579">1 × 1 conv (C → C/8) → ReLU</text>
+  <text x="890" y="919" style="font-size:16px;fill:#526579">1 × 1 conv (C/8 → C) → Sigmoid → multiply y</text>
+  <text x="48" y="934" class="subtitle">BN = batch normalization · SiLU = swish activation</text>
+  <text x="48" y="963" class="subtitle">Shapes show channels × height × width; the batch dimension is omitted.</text>
+  <text x="40" y="1024" style="font-size:15px;fill:#64748b">Source: ResidualAttentionCNN, ResidualAttentionBlock, and ChannelAttention in gallbladder_disease.ipynb</text>
+  <polygon points="248,235 240,231 240,239" fill="#64748b"/>
+  <polygon points="480,235 472,231 472,239" fill="#64748b"/>
+  <polygon points="712,235 704,231 704,239" fill="#64748b"/>
+  <polygon points="944,235 936,231 936,239" fill="#64748b"/>
+  <polygon points="1176,235 1168,231 1168,239" fill="#64748b"/>
+  <polygon points="1285,363 1281,355 1289,355" fill="#64748b"/>
+  <polygon points="1146,434 1154,430 1154,438" fill="#64748b"/>
+  <polygon points="873,434 881,430 881,438" fill="#64748b"/>
+  <polygon points="600,434 608,430 608,438" fill="#64748b"/>
+  <polygon points="327,434 335,430 335,438" fill="#64748b"/>
+  <polygon points="241,665 233,661 233,669" fill="#64748b"/>
+  <polygon points="491,665 483,661 483,669" fill="#64748b"/>
+  <polygon points="785,700 781,692 789,692" fill="#64748b"/>
+  <polygon points="371,830 363,826 363,834" fill="#64748b"/>
+  <polygon points="785,756 781,764 789,764" fill="#64748b"/>
+  <polygon points="866,728 858,724 858,732" fill="#64748b"/>
+  <polygon points="1136,728 1128,724 1128,732" fill="#64748b"/>
+</svg>

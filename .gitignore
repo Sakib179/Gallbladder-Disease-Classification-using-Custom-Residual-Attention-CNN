@@ -1,0 +1,14 @@
+# Download the dataset separately from Mendeley Data.
+/Gallblader Diseases Dataset/
+
+# Generated model checkpoints
+/outputs/*.pt
+/outputs/*.pth
+
+# Local environments and notebook caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
