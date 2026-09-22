@@ -6,7 +6,7 @@ A PyTorch project that classifies ultrasound images into **nine gallbladder cond
 
 ## Dataset
 
-Source: [Gallblader Diseases Dataset, version 2](https://data.mendeley.com/datasets/r6h24d2d3y/2), with **10,692 ultrasound images** in nine class folders.
+Source: [Gallblader Diseases Dataset](https://data.mendeley.com/datasets/r6h24d2d3y/2), with **10,692 ultrasound images** in nine class folders.
 
 | Training | Validation | Test |
 | ---: | ---: | ---: |
